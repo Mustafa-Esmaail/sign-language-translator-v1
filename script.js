@@ -319,16 +319,16 @@ async function predictWebcam() {
     // console.log(classesNames[idx]);
     addSpace= document.getElementsByClassName('cam-result')
    
-    letter.push(classesNames[idx]);
+    Camletter.push(classesNames[idx]);
     addSpace.addEventListener("click", ()=>{
 
-        letter.push(' ');
+        Camletter.push(' ');
     });
     word= letter.join('');
     cam.innerHTML=word
 
     
-    console.log(letter);
+    console.log(Camletter);
   });
 
   canvasCtx.save();
