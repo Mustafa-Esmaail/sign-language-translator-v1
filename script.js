@@ -50,6 +50,7 @@ const classesNames = [
 ];
 let spans = document.getElementsByClassName("img-result");
 let cam = document.getElementsByClassName("cam-result");
+let cam = document.getElementsByClassName("cam-result");
 console.log(spans)
 let word=''
 let handLandmarker = undefined;
@@ -318,7 +319,7 @@ async function predictWebcam() {
     const idx = arr.indexOf(maxPredict);
     // console.log(prediction.print());
     // console.log(classesNames[idx]);
-    addSpace= document.getElementsByClassName('cam-result')
+    addSpace= document.getElementById('addSpace')
    
     Camletter.push(classesNames[idx]);
     addSpace.addEventListener("click", ()=>{
@@ -350,14 +351,4 @@ async function predictWebcam() {
   }
 }
 
-//     const el = document.getElementBy("addSpace")
-//     if (el) {
-//       el.addEventListener('click', addSpace);
-//     }
-
-// function addSpace(letter){
-//     console.log(letter)
-//     let old=cam[0].innerText
-//     cam.innerHTML=old.concat("",' sada');
-//     console.log(cam[0].innerText)
-// }
+    
