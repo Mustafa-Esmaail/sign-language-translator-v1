@@ -269,15 +269,16 @@ async function predictWebcam() {
   // const landmark = await landmarkModel.detect(video);
   results.landmarks.map((landmarks) => {
     let landmark_point = [];
+    console.log(landmarks);
 
     landmarks.map((landmark) => {
       const landmark_x = Math.min(
-        Number(landmark.x * videoWidth),
-        videoWidth - 1
+        Number(landmark.x * video.style.width),
+        video.style.width - 1
       );
       const landmark_y = Math.min(
-        Number(landmark.y * videoHeight),
-        videoHeight - 1
+        Number(landmark.y * video.style.height),
+        height.style.width - 1
       );
       landmark_point.push([landmark_x, landmark_y]);
     });
