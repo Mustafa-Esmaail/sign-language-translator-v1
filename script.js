@@ -50,7 +50,7 @@ const classesNames = [
 ];
 let spans = document.getElementsByClassName("img-result");
 let cam = document.getElementsByClassName("cam-result");
-let cam = document.getElementsByClassName("cam-result");
+
 console.log(spans)
 let word=''
 let handLandmarker = undefined;
