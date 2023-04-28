@@ -326,7 +326,7 @@ async function predictWebcam() {
 
         Camletter.push(' ');
     });
-    word= letter.join('');
+    word= Camletter.join('');
     cam.innerHTML=word
 
     
