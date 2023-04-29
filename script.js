@@ -14,56 +14,54 @@ import {
 } from "https://cdn.skypack.dev/@mediapipe/tasks-vision@0.1.0-alpha-11";
 const demosSection = document.getElementById("demos");
 const classesNames = [
-  "ain",
-  "al",
-  "aleff",
-  "bb",
-  "dal",
-  "dha",
-  "dhad",
-  "fa",
-  "gaaf",
-  "ghain",
-  "ha",
-  "haa",
-  "jeem",
-  "kaaf",
-  "khaa",
-  "la",
-  "laam",
-  "meem",
+  "ع",
+  "ال",
+  "ا",
+  "ب",
+  "د",
+  "ظ",
+  "ض",
+  "ف",
+  "ق",
+  "غ",
+  "ه",
+  "ح",
+  "ج",
+  "ك",
+  "خ",
+  "لا",
+  "ل",
+  "م",
   "nothing",
-  "nun",
-  "ra",
-  "saad",
-  "seen",
-  "sheen",
-  "ta",
-  "taa",
-  "thaa",
-  "thal",
-  "toot",
-  "waw",
-  "ya",
-  "yaa",
-  "zay",
+  "ن",
+  "ر",
+  "ص",
+  "س",
+  "ش",
+  "ت",
+  "ط",
+  "ث",
+  "ذ",
+  "ة",
+  "و",
+  "ي",
+  "ئ",
+  "ز",
 ];
 let spans = document.getElementsByClassName("img-result");
 let cam = document.getElementsByClassName("cam-result");
-
-console.log(spans)
-let word=''
+let word = "";
 let handLandmarker = undefined;
 let handModel = undefined;
 let Camletter = [];
 let Imgletter = [];
 let runningMode = "IMAGE";
 let enableWebcamButton;
-let addSpace;
+let Space=false;
 let webcamRunning = false;
 
-const videoHeight = "360px";
-const videoWidth = "480px";
+const videoHeight = 360;
+const videoWidth = 480;
 // Before we can use HandLandmarker class we must wait for it to finish
 // loading. Machine Learning models can be large and take a moment to
 // get everything needed to run.
@@ -84,7 +82,6 @@ const createHandLandmarker = async () => {
   demosSection.classList.remove("invisible");
 };
 createHandLandmarker();
-
 
 /********************************************************************
 // Demo 1: Grab a bunch of images from the page and detection them
@@ -175,17 +172,16 @@ async function handleClick(event) {
     const arr = Array.from(handResult);
     const maxPredict = Math.max.apply(null, arr);
     const idx = arr.indexOf(maxPredict);
-    console.log(handResult);
-    console.log(arr);
-    console.log(maxPredict);
-    console.log(idx);
+    // console.log(handResult);
+    // console.log(arr);
+    // console.log(maxPredict);
+    // console.log(idx);
 
     Imgletter.push(classesNames[idx]);
-    console.log(Imgletter);
-    console.log(event.target.id);
+    // console.log(Imgletter);
+    // console.log(event.target.id);
     // console.log()
-    spans[event.target.id - 1].innerHTML=classesNames[idx];
-
+    spans[event.target.id - 1].innerHTML = classesNames[idx];
   });
   const canvas = document.createElement("canvas");
   canvas.setAttribute("class", "canvas");
@@ -240,6 +236,10 @@ function enableCam(event) {
   if (webcamRunning === true) {
     webcamRunning = false;
     enableWebcamButton.innerText = "ENABLE PREDICTIONS";
+    // let addSpace = document.getElementById("addSpace");
+    // cam.innerHTML=Camletter.join('')
+
+    
   } else {
     webcamRunning = true;
     enableWebcamButton.innerText = "DISABLE PREDICITONS";
@@ -255,10 +255,10 @@ function enableCam(event) {
   });
 }
 async function predictWebcam() {
-  canvasElement.style.height = videoHeight;
-  video.style.height = videoHeight;
-  canvasElement.style.width = videoWidth;
-  video.style.width = videoWidth;
+  canvasElement.style.height = `${videoHeight}px`;
+  video.style.height = `${videoHeight}px`;
+  canvasElement.style.width = `${videoWidth}px`;
+  video.style.width = `${videoWidth}px`;
   // Now let's start detecting the stream.
   if (runningMode === "IMAGE") {
     runningMode = "VIDEO";
@@ -267,19 +267,18 @@ async function predictWebcam() {
   let startTimeMs = performance.now();
   const results = handLandmarker.detectForVideo(video, startTimeMs);
 
-  // const landmark = await landmarkModel.detect(video);
   results.landmarks.map((landmarks) => {
     let landmark_point = [];
-    console.log(landmarks);
 
     landmarks.map((landmark) => {
+
       const landmark_x = Math.min(
-        Number(landmark.x * video.style.width),
-        video.style.width - 1
+        Number(landmark.x * videoWidth),
+        videoWidth - 1
       );
       const landmark_y = Math.min(
-        Number(landmark.y * video.style.height),
-        height.style.width - 1
+        Number(landmark.y * videoHeight),
+        videoHeight - 1
       );
       landmark_point.push([landmark_x, landmark_y]);
     });
@@ -287,7 +286,6 @@ async function predictWebcam() {
     var base_x = 0;
     var base_y = 0;
     let marks = [];
-    console.log(landmark_point);
 
     landmark_point.map((point, index) => {
       if (index === 0) {
@@ -307,9 +305,6 @@ async function predictWebcam() {
       marks[idx] = marks[idx] / max_value;
     });
 
-    console.log(marks);
-
-    // console.log(tfMark);
     let tfMark = tf.tensor(marks).reshape([1, 42]);
 
     const prediction = handModel.predict(tfMark);
@@ -317,20 +312,8 @@ async function predictWebcam() {
     const arr = Array.from(handResult);
     const maxPredict = Math.max.apply(null, arr);
     const idx = arr.indexOf(maxPredict);
-    // console.log(prediction.print());
-    // console.log(classesNames[idx]);
-    addSpace= document.getElementById('addSpace')
-   
     Camletter.push(classesNames[idx]);
-    addSpace.addEventListener("click", ()=>{
 
-        Camletter.push(' ');
-    });
-    word= Camletter.join('');
-    cam.innerHTML=word
-
-    
-    console.log(Camletter);
   });
 
   canvasCtx.save();
@@ -344,11 +327,29 @@ async function predictWebcam() {
       drawLandmarks(canvasCtx, landmarks, { color: "#FF0000", lineWidth: 2 });
     }
   }
+
   canvasCtx.restore();
   // Call this function again to keep predicting when the browser is ready.
   if (webcamRunning === true) {
-    window.requestAnimationFrame(predictWebcam);
+    word = Camletter.join("");
+    console.log(Camletter)
+    let addSpace = document.getElementById("addSpace");
+    addSpace.addEventListener('click',()=>{
+      Camletter.push(' ')
+    })
+    let delChar = document.getElementById("delChar");
+    delChar.addEventListener('click',()=>{
+      Camletter[Camletter.length-1]='';
+    })
+    let delAll = document.getElementById("delAll");
+    delAll.addEventListener('click',()=>{
+      Camletter.splice(0, Camletter.length, );
+    })
+    console.log(Camletter)
+
+    document.querySelector(".cam-result").innerHTML=word
+    setTimeout(() => {
+      window.requestAnimationFrame(predictWebcam);
+    }, 500);
   }
 }
-
-    
