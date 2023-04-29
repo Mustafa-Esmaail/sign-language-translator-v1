@@ -135,31 +135,31 @@ limitations under the License. -->
     <h2>Demo: Detecting Images</h2>
     <p><b>Click on an image below</b> to see the key landmarks of the hands.</p>
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-sm">
         <div class="detectOnClick">
-          <img id="1" src="./assets/img/1.jpg" width="100%" crossorigin="anonymous" title="Click to get detection!" />
+          <img class="img-fluid" id="1" src="./assets/img/1.jpg" width="100%" crossorigin="anonymous" title="Click to get detection!" />
           <span class="img-result"></span>
 
         </div>
 
       </div>
-      <div class="col-md-3">
+      <div class="col-sm">
         <div class="detectOnClick">
-          <img id="2" src="./assets/img/2.jpg" width="100%" crossorigin="anonymous" title="Click to get detection!" />
+          <img class="img-fluid" id="2" src="./assets/img/2.jpg" width="100%" crossorigin="anonymous" title="Click to get detection!" />
           <span class="img-result"></span>
 
         </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-sm">
         <div class="detectOnClick">
-          <img id="3" src="./assets/img/3.jpg" width="100%" crossorigin="anonymous" title="Click to get detection!" />
+          <img class="img-fluid" id="3" src="./assets/img/3.jpg" width="100%" crossorigin="anonymous" title="Click to get detection!" />
           <span class="img-result"></span>
         </div>
 
       </div>
-      <div class="col-md-3">
+      <div class="col-sm">
         <div class="detectOnClick">
-          <img id="4" src="./assets/img/4.jpg" width="100%" crossorigin="anonymous" title="Click to get detection!" />
+          <img class="img-fluid" id="4" src="./assets/img/4.jpg" width="100%" crossorigin="anonymous" title="Click to get detection!" />
           <span class="img-result"></span>
 
         </div>
@@ -175,10 +175,10 @@ limitations under the License. -->
       <span class="mdc-button__label">ENABLE WEBCAM</span>
     </button>
 
-    <div id="liveView" class="videoView">
+    <div id="liveView" class="videoView ">
 
-      <div style="position: relative;">
-        <video id="webcam" autoplay playsinline></video>
+      <div style="position: relative; overflow: hidden;" id="Cam" >
+        <video id="webcam" autoplay playsinline class="img-fluid"></video>
         <canvas class="output_canvas" id="output_canvas" width="1280" height="720"
           style="position: absolute; left: 0px; top: 0px;"></canvas>
 
@@ -186,9 +186,17 @@ limitations under the License. -->
 
 
     </div>
-    <button id="addSpace" class="mdc-button mdc-button--raised mb-4" onclick="addSpace()">
+    <button id="addSpace" class="mdc-button mdc-button--raised mb-4" >
       <span class="mdc-button__ripple"></span>
-      <span class="mdc-button__label">Add Space</span>
+      <span class="mdc-button__label">كون كلمه</span>
+    </button>
+    
+    <button id="delChar" class="mdc-button mdc-button--raised mb-4" >
+      <span class="mdc-button__ripple"></span>
+      <span class="mdc-button__label">حذف اخر حرف</span>
+    </button><button id="delAll" class="mdc-button mdc-button--raised mb-4" >
+      <span class="mdc-button__ripple"></span>
+      <span class="mdc-button__label">حذف الجميع</span>
     </button>
     <div>
       <span class="cam-result"></span>
@@ -348,6 +356,7 @@ limitations under the License. -->
   <!-- Core theme JS-->
   <!-- partial -->
   <script type="module" src="./script.js"></script>
+  
 
 
 </body>
